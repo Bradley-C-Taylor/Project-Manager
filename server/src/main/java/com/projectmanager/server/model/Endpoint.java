@@ -62,11 +62,11 @@ public class Endpoint {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       Endpoint endpoint = (Endpoint) o;
-      return id == endpoint.id && url.equals(endpoint.url) && method.equals(endpoint.method) && params.equals(endpoint.params);
+      return id == endpoint.id && url.equals(endpoint.url) && method.equals(endpoint.method);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, url, method, params);
+      return Objects.hash(id, url, method);
    }
 }

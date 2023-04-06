@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Param {
 
    private int id;
-   private int name;
-   private int description;
+   private String name;
+   private String description;
    private boolean optional = false;
 
    public int getId() {
@@ -17,19 +17,19 @@ public class Param {
       this.id = id;
    }
 
-   public int getName() {
+   public String getName() {
       return name;
    }
 
-   public void setName(int name) {
+   public void setName(String name) {
       this.name = name;
    }
 
-   public int getDescription() {
+   public String getDescription() {
       return description;
    }
 
-   public void setDescription(int description) {
+   public void setDescription(String description) {
       this.description = description;
    }
 

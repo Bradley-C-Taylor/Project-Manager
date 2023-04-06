@@ -17,8 +17,15 @@ public class EndpointServiceImp implements EndpointService{
 
 
    @Override
-   public List<Endpoint> getEndpoints() {
+   public List<Endpoint> getEndpoints(String name, Integer projectId) {
       List<Endpoint> endpoints;
-      return null;
+      if(name.equals("") && projectId == null) {
+         endpoints = null;
+      } else if(projectId == null) {
+         endpoints = endpointDao.getAllEndpointsByName(name);
+      } else {
+         endpoints = endpointDao.getAllEndpointsById(projectId);
+      }
+      return endpoints;
    }
 }

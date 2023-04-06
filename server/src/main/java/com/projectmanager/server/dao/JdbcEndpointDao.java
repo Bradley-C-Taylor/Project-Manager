@@ -17,7 +17,7 @@ public class JdbcEndpointDao implements EndpointDao{
    public JdbcEndpointDao(JdbcTemplate jdbcTemplate) {
       this.jdbcTemplate = jdbcTemplate;
    }
-
+   
    @Override
    public List<Endpoint> getAllEndpointsById(Integer projectId) {
       List<Endpoint> endpointList = new ArrayList<>();
@@ -25,35 +25,38 @@ public class JdbcEndpointDao implements EndpointDao{
               "FROM endpoint e JOIN project p ON e.project_id = p.project_id " +
               "LEFT JOIN endpoint_param ep ON e.endpoint_id = ep.endpoint_id " +
               "WHERE p.project_id = ?;";
-      SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery);
+      SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery, projectId);
       while(rowSet.next()) {
-         mapRowToEndpoint(rowSet, endpointList);
+         endpointList.add(mapRowToEndpoint(rowSet, endpointList));
       }
       return endpointList;
    }
 
    @Override
    public List<Endpoint> getAllEndpointsByName(String name) {
+      List<Endpoint> endpointList = new ArrayList<>();
       String sqlQuery = "SELECT e.endpoint_url, e.endpoint_method, ep.param_name, ep.param_description, ep.param_optional " +
               "FROM endpoint e JOIN project p ON e.project_id = p.project_id " +
               "LEFT JOIN endpoint_param ep ON e.endpoint_id = ep.endpoint_id " +
               "WHERE p.project_name = ?;";
-      return null;
+      SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery, name);
+      while(rowSet.next()) {
+         endpointList.add(mapRowToEndpoint(rowSet, endpointList));
+      }
+      return endpointList;
    }
 
    private Endpoint mapRowToEndpoint(SqlRowSet rowSet, List<Endpoint> endpointList) {
       Endpoint point = new Endpoint();
       point.setId(rowSet.getInt("endpoint_id"));
-      point.setUrl(rowSet.getString("endpoint_url"));
-      point.setMethod(rowSet.getString("endpoint_method"));
       if(endpointList.contains(point)) {
-         //Add Params to existing
-
-      } else {
-         //Add Params to newly created
+         point = endpointList.remove(endpointList.indexOf(point));
+      }
+      if(rowSet.getInt("param_id") != 0) {
          point.addParam(mapRowToParam(rowSet));
       }
-
+      point.setUrl(rowSet.getString("endpoint_url"));
+      point.setMethod(rowSet.getString("endpoint_method"));
       return point;
    }
    private Param mapRowToParam(SqlRowSet rowSet) {

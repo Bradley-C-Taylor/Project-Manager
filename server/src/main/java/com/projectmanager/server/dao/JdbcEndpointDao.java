@@ -17,7 +17,7 @@ public class JdbcEndpointDao implements EndpointDao{
    public JdbcEndpointDao(JdbcTemplate jdbcTemplate) {
       this.jdbcTemplate = jdbcTemplate;
    }
-   
+
    @Override
    public List<Endpoint> getAllEndpointsById(Integer projectId) {
       List<Endpoint> endpointList = new ArrayList<>();

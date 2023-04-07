@@ -38,7 +38,7 @@ h1 {
 nav.nav-container {
   display: flex;
   justify-content: space-between;
-  background-color: #2c3e50;
+  background-color: #2c3e50ea;
   color: rgb(191, 225, 255);
 }
 
@@ -46,9 +46,11 @@ ul.nav-list {
   list-style: none;
   display: flex;
   padding: 0 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 ul.nav-list li {
+  display: flex;
+  align-items: center;
   padding: 0 1.5rem;
   border-right: 3px solid;
 }

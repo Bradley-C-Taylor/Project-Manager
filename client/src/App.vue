@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <nav class="nav-container">
-      <h1>Project Manager</h1>
+      <h1><font-awesome-icon icon="fa-solid fa-bars" class="switch-project"/>Project Manager</h1>
       <ul class="nav-list">
+        <li>
+          <router-link :to="{name: 'home'}">
+            <font-awesome-icon icon="fa-solid fa-house" class="home"/>
+          </router-link>
+        </li>
         <li>API</li>
         <li>Client</li>
         <li>Diagrams</li>
-        <li>To-Do</li>
+        <li><router-link :to="{name: 'todo'}">To-do</router-link></li>
         <li>Login</li>
       </ul>
     </nav>
@@ -14,23 +19,38 @@
   </div>
 </template>
 
+<script>
+
+export default {
+
+}
+</script>
+
 <style>
-body{
+:root {
+  --dark-blue: #2c3e50ea;
+  --light-blue: rgb(191, 225, 255);
+  --xtr-light-blue: #e0fbfc;
+}
+
+body, html{
   height: 100%;
   margin: 0;
 }
 
 #app {
+  height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--dark-blue);
 }
 
 h1 {
   display: flex;
   align-items: center;
+  gap: .5rem;
   padding: 0 3rem;
   font-size: 2rem;
 }
@@ -38,8 +58,8 @@ h1 {
 nav.nav-container {
   display: flex;
   justify-content: space-between;
-  background-color: #2c3e50ea;
-  color: rgb(191, 225, 255);
+  background-color: var(--dark-blue);
+  color: var(--light-blue);
 }
 
 ul.nav-list {
@@ -53,5 +73,8 @@ ul.nav-list li {
   align-items: center;
   padding: 0 1.5rem;
   border-right: 3px solid;
+}
+ul.nav-list li:hover {
+  cursor: pointer;
 }
 </style>

@@ -1,14 +1,25 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <nav class="nav-container">
+      <h1>Project Manager</h1>
+      <ul class="nav-list">
+        <li>API</li>
+        <li>Client</li>
+        <li>Diagrams</li>
+        <li>To-Do</li>
+        <li>Login</li>
+      </ul>
     </nav>
     <router-view/>
   </div>
 </template>
 
 <style>
+body{
+  height: 100%;
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,16 +28,28 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+h1 {
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  font-size: 2rem;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+nav.nav-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2c3e50;
+  color: rgb(191, 225, 255);
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+ul.nav-list {
+  list-style: none;
+  display: flex;
+  padding: 0 3rem;
+  font-size: 2rem;
+}
+ul.nav-list li {
+  padding: 0 1.5rem;
+  border-right: 3px solid;
 }
 </style>
